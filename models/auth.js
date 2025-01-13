@@ -61,9 +61,13 @@ export class AuthModel {
           throw new Error('Wrong password')
         }
 
-        const token = jwt.sign({ id: user.id, email }, 'secret', {
-          expiresIn: '1h'
-        })
+        const token = jwt.sign(
+          { id: user.id, email },
+          process.env.SECRET_JWT_KEY,
+          {
+            expiresIn: '1h'
+          }
+        )
 
         return { message: 'Login successful', email, token }
       })
