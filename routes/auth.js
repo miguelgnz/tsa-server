@@ -9,7 +9,7 @@ export const verifyToken = (req, res, next) => {
   const token = req.cookies['access-token']
 
   if (!token) {
-    return res.status(401).json({ error: 'Access denied' })
+    return res.status(401).json({ error: 'Access denied, user not authenticated' })
   }
 
   try {
@@ -23,9 +23,9 @@ export const verifyToken = (req, res, next) => {
 
 // Register route
 router.post('/register', async (req, res) => {
-  const { username, password, email } = req.body
+  const { email, password, firstName, lastName, phoneNumber } = req.body
 
-  await AuthModel.register(username, password, email)
+  await AuthModel.register(email, password, firstName, lastName, phoneNumber)
     .then((result) => {
       res.json(result)
     })
@@ -58,6 +58,11 @@ router.post('/login', (req, res) => {
 router.post('/logout', (req, res) => {})
 
 // Protected route
-router.get('/protected', verifyToken, (req, res) => {
-  res.json({ message: 'Protected route' })
+router.get('/user', verifyToken, (req, res) => {
+  // Verify if token is valid, if so return user data from token
+
+  const token = req.cookies['access-token']
+  const user = jwt.decode(token)
+  console.log('User from token:', user)
+  res.json(user)
 })
