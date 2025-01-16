@@ -9,7 +9,9 @@ export const verifyToken = (req, res, next) => {
   const token = req.cookies['access-token']
 
   if (!token) {
-    return res.status(401).json({ error: 'Access denied, user not authenticated' })
+    return res
+      .status(401)
+      .json({ error: 'Access denied, user not authenticated' })
   }
 
   try {
@@ -55,7 +57,9 @@ router.post('/login', (req, res) => {
 })
 
 // Logout route
-router.post('/logout', (req, res) => {})
+router.post('/logout', (req, res) => {
+  res.clearCookie('access-token').send('User logged out')
+})
 
 // Protected route
 router.get('/user', verifyToken, (req, res) => {
@@ -63,6 +67,5 @@ router.get('/user', verifyToken, (req, res) => {
 
   const token = req.cookies['access-token']
   const user = jwt.decode(token)
-  console.log('User from token:', user)
   res.json(user)
 })
