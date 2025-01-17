@@ -61,12 +61,14 @@ export class AuthModel {
       })
       .then((result) => {
         return {
+          success: true,
           message: 'User created',
-          id: result.insertedId,
-          email,
-          firstName,
-          lastName,
-          phoneNumber
+          user: {
+            email,
+            firstName,
+            lastName,
+            phoneNumber
+          }
         }
       })
       .catch((err) => {
@@ -109,12 +111,15 @@ export class AuthModel {
         )
 
         return {
+          success: true,
           message: 'Login successful',
-          email,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          phoneNumber: user.phoneNumber,
-          token
+          user: {
+            email,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            phoneNumber: user.phoneNumber,
+            token
+          }
         }
       })
       .catch((err) => {

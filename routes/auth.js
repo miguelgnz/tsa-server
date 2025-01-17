@@ -32,7 +32,10 @@ router.post('/register', async (req, res) => {
       res.json(result)
     })
     .catch((err) => {
-      res.status(400).json({ error: err.message })
+      res.status(400).json({
+        success: false,
+        error: err.message
+      })
     })
 })
 
@@ -43,7 +46,7 @@ router.post('/login', (req, res) => {
   AuthModel.login(email, password)
     .then((result) => {
       res
-        .cookie('access-token', result.token, {
+        .cookie('access-token', result.user.token, {
           httpOnly: true, // The cookie only accessible by the web server
           secure: process.env.NODE_ENV === 'production', // Cookie only sent in HTTPS
           sameSite: 'strict', // The cookie is not sent with cross-origin requests
@@ -52,7 +55,7 @@ router.post('/login', (req, res) => {
         .send(result)
     })
     .catch((err) => {
-      res.status(400).json({ error: err.message })
+      res.status(400).json({ success: false, message: err.message })
     })
 })
 
