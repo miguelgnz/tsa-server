@@ -1,5 +1,6 @@
 import { MongoClient, ServerApiVersion } from 'mongodb'
-const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@tsacluster.6yau5.mongodb.net/?retryWrites=true&w=majority&appName=tsacluster`
+// const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@tsacluster.6yau5.mongodb.net/?retryWrites=true&w=majority&appName=tsacluster`
+const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@tsacluster.6yau5.mongodb.net/tsa-db?retryWrites=true&w=majority`
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
