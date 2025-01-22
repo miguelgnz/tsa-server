@@ -34,4 +34,4 @@ mongoConnect((client) => {
   })
 })
 
-export default app;
+export default app
