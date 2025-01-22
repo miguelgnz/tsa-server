@@ -14,8 +14,14 @@ app.use(cookieParser())
 // Cors middleware
 app.use(
   cors({
-    origin: 'http://localhost:3001',
-    methods: ['GET', 'POST', 'PATCH', 'DELETE', 'PUT'],
+    origin: [
+      'http://localhost:3001',
+      'https://mdt-ui.vercel.app',
+      'https://mdt-ui-3tva-miguelgnzs-projects.vercel.app/',
+      'https://mdt-ui-3tva-git-main-miguelgnzs-projects.vercel.app/',
+      'https://mdt-ui-3tva-git-develop-miguelgnzs-projects.vercel.app/'
+    ],
+    methods: ['DELETE', 'GET', 'PATCH', 'POST', 'PUT'],
     credentials: true
   })
 )
